@@ -45,7 +45,7 @@ EMPTY_FLAGS = {
 }
 
 
-class SharkSDXLPipeline:
+class AMDSharkSDXLPipeline:
     def __init__(
         self,
         hf_model_name: str,
@@ -61,8 +61,8 @@ class SharkSDXLPipeline:
         ireec_flags: dict = EMPTY_FLAGS,
         attn_spec: str = None,
         decomp_attn: bool = False,
-        pipeline_dir: str = "./shark_vmfbs",
-        external_weights_dir: str = "./shark_weights",
+        pipeline_dir: str = "./AMDShark_vmfbs",
+        external_weights_dir: str = "./AMDShark_weights",
         external_weights: str = "safetensors",
         vae_decomp_attn: bool = False,
         custom_vae: str = "",
@@ -700,7 +700,7 @@ class SharkSDXLPipeline:
             if not os.path.exists(scheduler_path):
                 scheduler_path, _ = self.export_submodel("scheduler")
             try:
-                self.runners["scheduler"] = schedulers.SharkSchedulerWrapper(
+                self.runners["scheduler"] = schedulers.AMDSharkSchedulerWrapper(
                     self.devices["unet"]["driver"],
                     scheduler_path,
                 )
@@ -709,7 +709,7 @@ class SharkSDXLPipeline:
                 self.cpu_scheduling = True
         if self.cpu_scheduling and needs_new_scheduler:
             scheduler = schedulers.get_scheduler(self.hf_model_name, scheduler_id)
-            self.runners["scheduler"] = schedulers.SharkSchedulerCPUWrapper(
+            self.runners["scheduler"] = schedulers.AMDSharkSchedulerCPUWrapper(
                 scheduler,
                 self.batch_size,
                 self.num_inference_steps,
@@ -1065,7 +1065,7 @@ if __name__ == "__main__":
             mlirs[submodel_id] = mlir_path
     if not args.external_weights_dir and args.external_weights:
         args.external_weights_dir = args.pipeline_dir
-    sdxl_pipe = SharkSDXLPipeline(
+    sdxl_pipe = AMDSharkSDXLPipeline(
         args.hf_model_name,
         args.height,
         args.width,

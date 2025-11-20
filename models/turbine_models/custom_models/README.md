@@ -1,9 +1,9 @@
 # Instructions
 
-Clone and install SHARK-Turbine
+Clone and install AMDShark-Turbine
 ```
-git clone https://github.com/nod-ai/SHARK-Turbine.git
-cd SHARK-Turbine
+git clone https://github.com/nod-ai/AMDShark-Turbine.git
+cd AMDShark-Turbine
 python -m venv turbine_venv && source turbine_venv/bin/activate
 
 pip install --index-url https://download.pytorch.org/whl/cpu \

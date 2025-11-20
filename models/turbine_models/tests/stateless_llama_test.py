@@ -76,7 +76,7 @@ class StatelessLlamaChecks(unittest.TestCase):
         cls.tokenizer = None
         cls.mod = None
 
-    # See: https://github.com/nod-ai/SHARK-Turbine/issues/601
+    # See: https://github.com/nod-ai/AMDShark-Turbine/issues/601
     # Developed issues related to the pytorch 2.3 upgrade.
     @unittest.expectedFailure
     def test_vmfb_comparison(self):
@@ -139,7 +139,7 @@ class StatelessLlamaChecks(unittest.TestCase):
             new_blob_name = new_blob_name[0] + "-pass.mlir"
             turbine_tank.changeBlobName(blob_name, new_blob_name)
 
-    # See: https://github.com/nod-ai/SHARK-Turbine/issues/601
+    # See: https://github.com/nod-ai/AMDShark-Turbine/issues/601
     # Developed issues related to the pytorch 2.3 upgrade.
     @unittest.expectedFailure
     def test_streaming_vmfb_comparison(self):
@@ -194,7 +194,7 @@ class StatelessLlamaChecks(unittest.TestCase):
         )
         check_output_string(torch_str, turbine_str)
 
-    # See: https://github.com/nod-ai/SHARK-Turbine/issues/560
+    # See: https://github.com/nod-ai/AMDShark-Turbine/issues/560
     # Developed issues related to the pytorch 2.3 upgrade.
     def test_rerotated_torch_comparison(self):
         torch_str = llm_runner.run_torch_llm(

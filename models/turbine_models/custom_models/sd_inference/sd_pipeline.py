@@ -208,7 +208,7 @@ torch_dtypes = {
 }
 
 
-class SharkSDPipeline(TurbinePipelineBase):
+class AMDSharkSDPipeline(TurbinePipelineBase):
     def __init__(
         self,
         hf_model_name: str | dict[str],
@@ -222,8 +222,8 @@ class SharkSDPipeline(TurbinePipelineBase):
         ireec_flags: str | dict[str] = None,
         attn_spec: str | dict[str] = None,
         decomp_attn: bool | dict[bool] = False,
-        pipeline_dir: str = "./shark_vmfbs",
-        external_weights_dir: str = "./shark_weights",
+        pipeline_dir: str = "./AMDShark_vmfbs",
+        external_weights_dir: str = "./AMDShark_weights",
         external_weights: str | dict[str] = "safetensors",
         num_inference_steps: int = 30,
         cpu_scheduling: bool = True,
@@ -427,7 +427,7 @@ class SharkSDPipeline(TurbinePipelineBase):
                 self.cpu_scheduling = True
         if self.cpu_scheduling:
             scheduler = schedulers.get_scheduler(self.base_model_name, scheduler_id)
-            self.scheduler = schedulers.SharkSchedulerCPUWrapper(
+            self.scheduler = schedulers.AMDSharkSchedulerCPUWrapper(
                 scheduler,
                 self.batch_size,
                 scheduler_device,
@@ -728,7 +728,7 @@ if __name__ == "__main__":
             ),
             "vae": args.vae_decomp_attn if args.vae_decomp_attn else args.decomp_attn,
         }
-    sd_pipe = SharkSDPipeline(
+    sd_pipe = AMDSharkSDPipeline(
         args.hf_model_name,
         args.height,
         args.width,

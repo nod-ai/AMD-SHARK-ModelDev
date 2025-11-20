@@ -14,12 +14,12 @@ YOUR_HF_TOKEN="insert token for headless"
 
 # clone and install dependencies
 sudo apt install -y git
-git clone https://github.com/nod-ai/SHARK-Turbine.git
-cd SHARK-Turbine
+git clone https://github.com/nod-ai/AMDShark-Turbine.git
+cd AMDShark-Turbine
 pip install -r core/requirements.txt
 pip install -r models/requirements.txt
 
-# do an editable install from the cloned SHARK-Turbine
+# do an editable install from the cloned AMDShark-Turbine
 pip install --editable core models
 
 # Log in with Hugging Face CLI if token setup is required

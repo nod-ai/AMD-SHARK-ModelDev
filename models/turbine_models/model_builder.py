@@ -64,7 +64,7 @@ class HFTransformerBuilder:
 
     def get_compiled_module(self, save_to: str = None) -> aot.CompiledModule:
         """
-        Compiles the PyTorch model into a compiled module using SHARK-Turbine's AOT compiler.
+        Compiles the PyTorch model into a compiled module using AMDShark-Turbine's AOT compiler.
 
         Args:
             save_to (str): one of: input (Torch IR) or import (linalg).

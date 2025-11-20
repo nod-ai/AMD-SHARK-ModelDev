@@ -37,7 +37,7 @@ from turbine_models.custom_models.sd_inference import utils
 from turbine_models.model_runner import vmfbRunner
 
 
-class SharkSchedulerWrapper:
+class AMDSharkSchedulerWrapper:
     def __init__(self, rt_device, vmfb):
         self.runner = vmfbRunner(rt_device, vmfb, None)
 
@@ -125,7 +125,7 @@ class SchedulingModel(torch.nn.Module):
         return sample.type(self.dtype)
 
 
-class SharkSchedulerCPUWrapper:
+class AMDSharkSchedulerCPUWrapper:
     @torch.no_grad()
     def __init__(
         self,

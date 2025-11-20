@@ -1,12 +1,12 @@
 
-# SHARK-Turbine SDXL CLI usage (ROCM)
+# AMDShark-Turbine SDXL CLI usage (ROCM)
 
 ## Pipeline (txt2img):
 
 Note: These commands are generally for unix, and use `$WEIGHTS_DIR`, `$PIPELINE_DIR`, and `$TARGET_TRIPLE` in place of actual values. You can set these env variables or replace them in the commands as desired.
 
 ```shell
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_compiled_pipeline.py --precision=fp16 --external_weights=irpa --device=rocm --rt_device=rocm --iree_target_triple=$TARGET_TRIPLE --scheduler_id=PNDM --num_inference_steps=30 --pipeline_dir=$PIPELINE_DIR --external_weights_dir=$WEIGHTS_DIR --attn_spec=default --compiled_pipeline
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_compiled_pipeline.py --precision=fp16 --external_weights=irpa --device=rocm --rt_device=rocm --iree_target_triple=$TARGET_TRIPLE --scheduler_id=PNDM --num_inference_steps=30 --pipeline_dir=$PIPELINE_DIR --external_weights_dir=$WEIGHTS_DIR --attn_spec=default --compiled_pipeline
 
 iree-benchmark-module \
  --module=$PWD/stable_diffusion_xl_base_1_0_64_fp16_prompt_encoder_rocm.vmfb \
@@ -35,15 +35,15 @@ The sdxl_compiled_pipeline script will do this for you, and you can switch betwe
 ```
 # Import to MLIR:
 
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_scheduled_unet.py --precision=fp16 --external_weights=safetensors --device=rocm --compile_to=mlir --external_weight_path=$WEIGHTS_DIR/unet.safetensors
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_scheduled_unet.py --precision=fp16 --external_weights=safetensors --device=rocm --compile_to=mlir --external_weight_path=$WEIGHTS_DIR/unet.safetensors
 
 # Compile to VMFB (MLIR not necessary here but this is faster if you are compiling more than once):
 
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_scheduled_unet.py --precision=fp16 --external_weights=safetensors --device=rocm --compile_to=vmfb --iree_target_triple=$TARGET_TRIPLE --input_mlir=$PWD/stable_diffusion_xl_base_1_0_PNDM_64_1024x1024_fp16_unet_30.mlir
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_scheduled_unet.py --precision=fp16 --external_weights=safetensors --device=rocm --compile_to=vmfb --iree_target_triple=$TARGET_TRIPLE --input_mlir=$PWD/stable_diffusion_xl_base_1_0_PNDM_64_1024x1024_fp16_unet_30.mlir
 
 # Test numerics (validate against pytorch cpu):
 
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_scheduled_unet_runner.py --compare_vs_torch --precision=fp16 --device=rocm --external_weight_path=$WEIGHTS_DIR/scheduled_unet.irpa --max_length=64 --pipeline_vmfb_path=./sdxl_pipeline_fp16_$TARGET_TRIPLE.vmfb --vmfb_path=$PWD/stable_diffusion_xl_base_1_0_64_1024x1024_fp16_scheduled_unet_rocm.vmfb
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_scheduled_unet_runner.py --compare_vs_torch --precision=fp16 --device=rocm --external_weight_path=$WEIGHTS_DIR/scheduled_unet.irpa --max_length=64 --pipeline_vmfb_path=./sdxl_pipeline_fp16_$TARGET_TRIPLE.vmfb --vmfb_path=$PWD/stable_diffusion_xl_base_1_0_64_1024x1024_fp16_scheduled_unet_rocm.vmfb
 
 # Benchmark with IREE CLI:
 
@@ -57,11 +57,11 @@ iree-benchmark-module --benchmark_repetitions=5   --device=rocm --module=$PWD/st
 ```
 # Import to MLIR:
 
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/unet.py --precision=fp16 --external_weights=safetensors --device=rocm --compile_to=mlir
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/unet.py --precision=fp16 --external_weights=safetensors --device=rocm --compile_to=mlir
 
 # Compile to VMFB (MLIR not necessary here but this is faster if you are compiling more than once):
 
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/unet.py --precision=fp16 --external_weights=safetensors --device=rocm --compile_to=vmfb --iree_target_triple=$TARGET_TRIPLE --input_mlir=$PWD/stable_diffusion_xl_base_1_0_64_1024x1024_fp16_unet.mlir
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/unet.py --precision=fp16 --external_weights=safetensors --device=rocm --compile_to=vmfb --iree_target_triple=$TARGET_TRIPLE --input_mlir=$PWD/stable_diffusion_xl_base_1_0_64_1024x1024_fp16_unet.mlir
 
 # Convert weights to IREE parameter archive format:
 
@@ -69,7 +69,7 @@ iree-convert-parameters --parameters=$WEIGHTS_DIR/unet.safetensors --output=$WEI
 
 # Test numerics (validate against pytorch cpu):
 
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/unet_runner.py --compare_vs_torch --precision=fp16 --device=rocm --external_weight_path=$WEIGHTS_DIR/scheduled_unet.irpa --max_length=64 --vmfb_path=$PWD/stable_diffusion_xl_base_1_0_64_1024x1024_fp16_unet_rocm.vmfb
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/unet_runner.py --compare_vs_torch --precision=fp16 --device=rocm --external_weight_path=$WEIGHTS_DIR/scheduled_unet.irpa --max_length=64 --vmfb_path=$PWD/stable_diffusion_xl_base_1_0_64_1024x1024_fp16_unet_rocm.vmfb
 
 # Benchmark with IREE CLI:
 
@@ -81,11 +81,11 @@ iree-benchmark-module --benchmark_repetitions=5   --device=rocm --module=$PWD/st
 ```
 # Import to MLIR:
 
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_prompt_encoder.py --precision=fp16 --external_weights=safetensors --device=rocm --rt_device=rocm --compile_to=mlir --iree_target_triple=$TARGET_TRIPLE --external_weight_path=$WEIGHTS_DIR/prompt_encoder.safetensors
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_prompt_encoder.py --precision=fp16 --external_weights=safetensors --device=rocm --rt_device=rocm --compile_to=mlir --iree_target_triple=$TARGET_TRIPLE --external_weight_path=$WEIGHTS_DIR/prompt_encoder.safetensors
 
 # Compile to VMFB (MLIR not necessary here but this is faster if you are compiling more than once):
 
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_prompt_encoder.py --precision=fp16 --external_weights=safetensors --device=rocm --rt_device=rocm --compile_to=vmfb --iree_target_triple=$TARGET_TRIPLE --input_mlir=$PWD/stable_diffusion_xl_base_1_0_64_fp16_prompt_encoder.mlir
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_prompt_encoder.py --precision=fp16 --external_weights=safetensors --device=rocm --rt_device=rocm --compile_to=vmfb --iree_target_triple=$TARGET_TRIPLE --input_mlir=$PWD/stable_diffusion_xl_base_1_0_64_fp16_prompt_encoder.mlir
 
 # Convert weights to IREE parameter archive format:
 
@@ -93,7 +93,7 @@ iree-convert-parameters --parameters=$WEIGHTS_DIR/prompt_encoder.safetensors --o
 
 # Test numerics (validate against pytorch cpu):
 
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_prompt_encoder_runner.py --compare_vs_torch --precision=fp16 --device=rocm --external_weight_path=$WEIGHTS_DIR/prompt_encoder.irpa --max_length=64 --vmfb_path=$PWD/stable_diffusion_xl_base_1_0_64_fp16_prompt_encoder_rocm.vmfb
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/sdxl_prompt_encoder_runner.py --compare_vs_torch --precision=fp16 --device=rocm --external_weight_path=$WEIGHTS_DIR/prompt_encoder.irpa --max_length=64 --vmfb_path=$PWD/stable_diffusion_xl_base_1_0_64_fp16_prompt_encoder_rocm.vmfb
 
 # Benchmark with IREE CLI:
 
@@ -106,11 +106,11 @@ iree-benchmark-module --benchmark_repetitions=5   --device=rocm --module=$PWD/st
 ```
 # Import to MLIR:
 
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/vae.py --precision=fp16 --external_weights=safetensors --device=rocm --compile_to=mlir --iree_target_triple=$TARGET_TRIPLE --external_weight_path=$WEIGHTS_DIR/vae_decode.safetensors
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/vae.py --precision=fp16 --external_weights=safetensors --device=rocm --compile_to=mlir --iree_target_triple=$TARGET_TRIPLE --external_weight_path=$WEIGHTS_DIR/vae_decode.safetensors
 
 # Compile to VMFB (MLIR not necessary here but this is faster if you are compiling more than once):
 
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/vae.py --precision=fp16 --external_weights=safetensors --device=rocm --compile_to=vmfb --iree_target_triple=$TARGET_TRIPLE --input_mlir=$PWD/stable_diffusion_xl_base_1_0_1024x1024_fp16_vae_decode.mlir
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/vae.py --precision=fp16 --external_weights=safetensors --device=rocm --compile_to=vmfb --iree_target_triple=$TARGET_TRIPLE --input_mlir=$PWD/stable_diffusion_xl_base_1_0_1024x1024_fp16_vae_decode.mlir
 
 # Convert weights to IREE parameter archive format:
 
@@ -118,7 +118,7 @@ iree-convert-parameters --parameters=$WEIGHTS_DIR/vae_decode.safetensors --outpu
 
 # Test numerics (validate against pytorch cpu):
 
-python /home/eagarvey/sdxl/SHARK-Turbine/models/turbine_models/custom_models/sdxl_inference/vae_runner.py --precision=fp16 --external_weights=irpa --device=rocm --iree_target_triple=$TARGET_TRIPLE --vmfb_path=$PWD/stable_diffusion_xl_base_1_0_1024x1024_fp16_vae_decode_rocm.vmfb --external_weight_path=$WEIGHTS_DIR/vae_decode.irpa --compare_vs_torch
+python /home/eagarvey/sdxl/AMDShark-Turbine/models/turbine_models/custom_models/sdxl_inference/vae_runner.py --precision=fp16 --external_weights=irpa --device=rocm --iree_target_triple=$TARGET_TRIPLE --vmfb_path=$PWD/stable_diffusion_xl_base_1_0_1024x1024_fp16_vae_decode_rocm.vmfb --external_weight_path=$WEIGHTS_DIR/vae_decode.irpa --compare_vs_torch
 
 # Benchmark with IREE CLI:
 

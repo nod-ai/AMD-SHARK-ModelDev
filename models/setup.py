@@ -35,12 +35,12 @@ PACKAGE_VERSION = version_info["package-version"]
 setup(
     name=f"turbine-models",
     version=f"{PACKAGE_VERSION}",
-    author="SHARK Authors",
+    author="AMDShark Authors",
     author_email="dan@nod.ai",
-    description="SHARK Turbine Machine Learning Model Zoo",
+    description="AMDShark Turbine Machine Learning Model Zoo",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/nod-ai/SHARK-Turbine",
+    url="https://github.com/nod-ai/AMDShark-Turbine",
     license="Apache-2.0",
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -54,7 +54,7 @@ setup(
         ],
     ),
     install_requires=[
-        "Shark-Turbine",
+        "AMDShark-Turbine",
         "protobuf",
         "sentencepiece",
         "transformers>=4.37.1",

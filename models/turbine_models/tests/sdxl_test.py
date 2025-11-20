@@ -403,7 +403,7 @@ class StableDiffusionXLTest(unittest.TestCase):
         if arguments["device"] in ["vulkan", "cuda"]:
             self.skipTest("Have issues with submodels on vulkan, cuda")
         from turbine_models.custom_models.sd_inference.sd_pipeline import (
-            SharkSDPipeline,
+            AMDSharkSDPipeline,
         )
 
         decomp_attn = {
@@ -411,7 +411,7 @@ class StableDiffusionXLTest(unittest.TestCase):
             "unet": False,
             "vae": True,
         }
-        sd_pipe = SharkSDPipeline(
+        sd_pipe = AMDSharkSDPipeline(
             arguments["hf_model_name"],
             arguments["height"],
             arguments["width"],
@@ -454,7 +454,7 @@ class StableDiffusionXLTest(unittest.TestCase):
                 "Have issues with submodels on vulkan, cuda; ROCM hangs on mi250 despite submodels working."
             )
         from turbine_models.custom_models.sd_inference.sd_pipeline import (
-            SharkSDPipeline,
+            AMDSharkSDPipeline,
         )
 
         decomp_attn = {
@@ -462,7 +462,7 @@ class StableDiffusionXLTest(unittest.TestCase):
             "unet": False,
             "vae": True,
         }
-        sd_pipe = SharkSDPipeline(
+        sd_pipe = AMDSharkSDPipeline(
             arguments["hf_model_name"],
             arguments["height"],
             arguments["width"],

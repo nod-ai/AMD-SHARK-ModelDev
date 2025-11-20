@@ -346,10 +346,10 @@ def get_mfma_spec_path(target_chip, save_dir, masked_attention=False, use_punet=
         url = "https://raw.githubusercontent.com/nod-ai/sdxl-scripts/main/int8-model/specs/attention_and_matmul_spec.mlir"
     elif not masked_attention:
         suffix = ""
-        url = "https://sharkpublic.blob.core.windows.net/sharkpublic/specs/no_pad/attention_and_matmul_spec_mfma.mlir"
+        url = "https://AMDSharkpublic.blob.core.windows.net/AMDSharkpublic/specs/no_pad/attention_and_matmul_spec_mfma.mlir"
     else:
         suffix = "_pad"
-        url = "https://sharkpublic.blob.core.windows.net/sharkpublic/specs/latest/attention_and_matmul_spec_gfx942.mlir"
+        url = "https://AMDSharkpublic.blob.core.windows.net/AMDSharkpublic/specs/latest/attention_and_matmul_spec_gfx942.mlir"
     attn_spec = urlopen(url).read().decode("utf-8")
     spec_path = os.path.join(save_dir, f"attention_and_matmul_spec_mfma{suffix}.mlir")
     with open(spec_path, "w") as f:
@@ -359,11 +359,11 @@ def get_mfma_spec_path(target_chip, save_dir, masked_attention=False, use_punet=
 
 def get_wmma_spec_path(target_chip, save_dir, masked_attention=False):
     if not masked_attention:
-        url = "https://sharkpublic.blob.core.windows.net/sharkpublic/specs/no_pad/attention_and_matmul_spec_wmma.mlir"
+        url = "https://AMDSharkpublic.blob.core.windows.net/AMDSharkpublic/specs/no_pad/attention_and_matmul_spec_wmma.mlir"
     elif target_chip == "gfx1100":
-        url = "https://sharkpublic.blob.core.windows.net/sharkpublic/specs/latest/attention_and_matmul_spec_gfx1100.mlir"
+        url = "https://AMDSharkpublic.blob.core.windows.net/AMDSharkpublic/specs/latest/attention_and_matmul_spec_gfx1100.mlir"
     elif target_chip in ["gfx1103", "gfx1150"]:
-        url = "https://sharkpublic.blob.core.windows.net/sharkpublic/specs/latest/attention_and_matmul_spec_gfx1150.mlir"
+        url = "https://AMDSharkpublic.blob.core.windows.net/AMDSharkpublic/specs/latest/attention_and_matmul_spec_gfx1150.mlir"
     else:
         return None
     attn_spec = urlopen(url).read().decode("utf-8")
@@ -407,7 +407,7 @@ def largest_error(array1, array2):
 
 def get_schedulers(model_id):
     # TODO: Robust scheduler setup on pipeline creation -- if we don't
-    # set batch_size here, the SHARK schedulers will
+    # set batch_size here, the AMDShark schedulers will
     # compile with batch size = 1 regardless of whether the model
     # outputs latents of a larger batch size, e.g. SDXL.
     # However, obviously, searching for whether the base model ID
