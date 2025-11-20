@@ -42,7 +42,7 @@ EMPTY_FLAGS = {
 }
 
 
-class SharkSD3Pipeline:
+class AMDSharkSD3Pipeline:
     def __init__(
         self,
         hf_model_name: str,
@@ -57,8 +57,8 @@ class SharkSD3Pipeline:
         ireec_flags: dict = EMPTY_FLAGS,
         attn_spec: str = None,
         decomp_attn: bool = False,
-        pipeline_dir: str = "./shark_vmfbs",
-        external_weights_dir: str = "./shark_weights",
+        pipeline_dir: str = "./AMDShark_vmfbs",
+        external_weights_dir: str = "./AMDShark_weights",
         external_weights: str = "safetensors",
         vae_decomp_attn: bool = False,
         cpu_scheduling: bool = False,
@@ -434,7 +434,7 @@ class SharkSD3Pipeline:
         print("\n[LOG] MMDiT loaded in ", unet_loaded - load_start, "sec")
 
         # if not self.cpu_scheduling:
-        #     runners["scheduler"] = sd3_schedulers.SharkSchedulerWrapper(
+        #     runners["scheduler"] = sd3_schedulers.AMDSharkSchedulerWrapper(
         #         self.devices["mmdit"]["driver"],
         #         vmfbs["scheduler"],
         #     )
@@ -498,7 +498,7 @@ class SharkSD3Pipeline:
             if not os.path.exists(scheduler_path):
                 scheduler_path, _ = self.export_submodel("scheduler")
             try:
-                self.runners["scheduler"] = sd3_schedulers.SharkSchedulerWrapper(
+                self.runners["scheduler"] = sd3_schedulers.AMDSharkSchedulerWrapper(
                     self.devices["mmdit"]["driver"],
                     scheduler_path,
                 )
@@ -869,7 +869,7 @@ if __name__ == "__main__":
             mlirs[submodel_id] = mlir_path
     if not args.external_weights_dir and args.external_weights:
         args.external_weights_dir = args.pipeline_dir
-    sd3_pipe = SharkSD3Pipeline(
+    sd3_pipe = AMDSharkSD3Pipeline(
         args.hf_model_name,
         args.height,
         args.width,

@@ -83,11 +83,11 @@ class UnetModel(torch.nn.Module):
 
 
 def get_punet_model(hf_model_name, external_weight_path, precision="i8"):
-    from sharktank.models.punet.model import (
-        Unet2DConditionModel as sharktank_unet2d,
-        ClassifierFreeGuidanceUnetModel as sharktank_CFGPunetModel,
+    from AMDSharktank.models.punet.model import (
+        Unet2DConditionModel as AMDSharktank_unet2d,
+        ClassifierFreeGuidanceUnetModel as AMDSharktank_CFGPunetModel,
     )
-    from sharktank.utils import cli
+    from AMDSharktank.utils import cli
 
     if precision == "i8":
         repo_id = "amd-shark/sdxl-quant-models"
@@ -131,8 +131,8 @@ def get_punet_model(hf_model_name, external_weight_path, precision="i8"):
             output_path,
         )
 
-    cond_unet = sharktank_unet2d.from_dataset(ds)
-    mdl = sharktank_CFGPunetModel(cond_unet)
+    cond_unet = AMDSharktank_unet2d.from_dataset(ds)
+    mdl = AMDSharktank_CFGPunetModel(cond_unet)
     return mdl
 
 
@@ -142,7 +142,7 @@ def get_punet_dataset(
     output_path,
     quant_params_path=None,
 ):
-    from sharktank.models.punet.tools import import_brevitas_dataset
+    from AMDSharktank.models.punet.tools import import_brevitas_dataset
 
     ds_import_args = [
         f"--config-json={config_json_path}",

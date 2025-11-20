@@ -340,7 +340,7 @@ class StableDiffusion3Test(unittest.TestCase):
     )
     def test04SDPipeline(self):
         from turbine_models.custom_models.sd_inference.sd_pipeline import (
-            SharkSDPipeline,
+            AMDSharkSDPipeline,
         )
 
         current_args = copy.deepcopy(default_arguments)
@@ -349,7 +349,7 @@ class StableDiffusion3Test(unittest.TestCase):
             "unet": False,
             "vae": current_args["vae_decomp_attn"],
         }
-        sd_pipe = SharkSDPipeline(
+        sd_pipe = AMDSharkSDPipeline(
             current_args["hf_model_name"],
             current_args["height"],
             current_args["width"],

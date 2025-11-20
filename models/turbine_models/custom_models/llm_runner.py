@@ -84,7 +84,7 @@ def append_bot_prompt(history, input_prompt):
     return history
 
 
-class SharkLLM(object):
+class AMDSharkLLM(object):
     def __init__(self, device, vmfb_path, external_weight_path, streaming_llm=False):
         self.runner = vmfbRunner(
             device=device,
@@ -174,7 +174,7 @@ def run_llm(
             use_fast=False,
             token=hf_auth_token,
         )
-    llm = SharkLLM(
+    llm = AMDSharkLLM(
         device=device,
         vmfb_path=vmfb_path,
         external_weight_path=external_weight_path,

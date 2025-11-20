@@ -1,4 +1,4 @@
-# Stable Diffusion XL with SHARK-Turbine
+# Stable Diffusion XL with AMDShark-Turbine
 
 ## Support
 
@@ -13,7 +13,7 @@ Following is a table that shows current status of turbine SDXL inference support
 | gfx942      | Yes                   | 💚 | 💚                  | 💚                  | 💚  |
 |             | No                    |               | 💚                  | 💚                  | 💚  |
 
-## Setup SHARK-Turbine for importing and running the SDXL pipeline or submodels.
+## Setup AMDShark-Turbine for importing and running the SDXL pipeline or submodels.
 
 Linux:
 ```shell
@@ -25,7 +25,7 @@ git clone https://iree-org/iree-turbine
 cd iree-turbine
 pip install -r pytorch-cpu-requirements.txt
 pip install -e .
-cd ../SHARK-Turbine
+cd ../AMDShark-Turbine
 pip install --pre --upgrade -e models -r models/requirements.txt
 ```
 
@@ -39,7 +39,7 @@ git clone https://iree-org/iree-turbine
 cd iree-turbine
 pip install -r pytorch-cpu-requirements.txt
 pip install -e .
-cd ../SHARK-Turbine
+cd ../AMDShark-Turbine
 pip install --pre --upgrade -e models -r models/requirements.txt
 ```
 
@@ -84,6 +84,6 @@ pytest models/turbine_models/tests/sdxl_test.py --device=cpu --rt_device=local-t
 Note: the following "prompt_encoder_f16.irpa" contains weights for both clip1 and clip2.
 The pipeline script will look for these filenames in the specified "external_weights_dir" under "prompt_encoder.irpa", "vae_decode.irpa", "scheduled_unet.irpa".
 It's not ideal in current state, but will be smoothed out now that general pipeline structure and file management needs are stable.
- - [prompt_encoder_f16.irpa](https://sharkpublic.blob.core.windows.net/sharkpublic/SDXL/SDXL_weights_fp16/prompt_encoder_fp16.irpa)
- - [scheduled_unet_f16.irpa](https://sharkpublic.blob.core.windows.net/sharkpublic/SDXL/SDXL_weights_fp16/scheduled_unet_f16.irpa)
- - [vae_decode_f16.irpa](https://sharkpublic.blob.core.windows.net/sharkpublic/SDXL/SDXL_weights_fp16/vae_encode_fp16.irpa)
+ - [prompt_encoder_f16.irpa](https://AMDSharkpublic.blob.core.windows.net/AMDSharkpublic/SDXL/SDXL_weights_fp16/prompt_encoder_fp16.irpa)
+ - [scheduled_unet_f16.irpa](https://AMDSharkpublic.blob.core.windows.net/AMDSharkpublic/SDXL/SDXL_weights_fp16/scheduled_unet_f16.irpa)
+ - [vae_decode_f16.irpa](https://AMDSharkpublic.blob.core.windows.net/AMDSharkpublic/SDXL/SDXL_weights_fp16/vae_encode_fp16.irpa)

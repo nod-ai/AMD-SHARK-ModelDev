@@ -28,9 +28,9 @@ jobs:
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
       AZ_PRIVATE_CONNECTION: ${{ secrets.ONNXPRIVATESTORAGE_AZ_PRIVATE_CONNECTION }}
       ROCR_VISIBLE_DEVICES: ${{ matrix.visible-device }}
-      TORCH_HOME: /groups/aig_sharks/test-suite-ci-cache
-      HF_HOME: /groups/aig_sharks/test-suite-ci-cache
-      TURBINE_TANK_CACHE_DIR: /groups/aig_sharks/test-suite-ci-cache
+      TORCH_HOME: /groups/aig_AMDSharks/test-suite-ci-cache
+      HF_HOME: /groups/aig_AMDSharks/test-suite-ci-cache
+      TURBINE_TANK_CACHE_DIR: /groups/aig_AMDSharks/test-suite-ci-cache
     steps:
       # We are using a persistent Gentoo runner here, and this python action is not supported for the arch
       # - name: "Setting up Python"

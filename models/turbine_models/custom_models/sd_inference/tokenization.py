@@ -7,7 +7,7 @@ import warnings
 
 
 # The following is copied from Diffusers' "encode_prompt" function in the StableDiffusion pipeline.
-# It has been lightly augmented to work with the SHARK-Turbine pipeline.
+# It has been lightly augmented to work with the AMDShark-Turbine pipeline.
 def encode_prompt(
     pipe,
     prompt,

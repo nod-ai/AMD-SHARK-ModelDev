@@ -152,7 +152,7 @@ def run_unet_split_scheduled(
     if not args.scheduler_vmfb_path:
         print("--scheduler_vmfb_path not supplied. Using cpu scheduling.")
         scheduler = schedulers.get_scheduler(args.hf_model_name, args.scheduler_id)
-        scheduler = schedulers.SharkSchedulerCPUWrapper(
+        scheduler = schedulers.AMDSharkSchedulerCPUWrapper(
             scheduler,
             args.batch_size,
             args.num_inference_steps,
@@ -161,7 +161,7 @@ def run_unet_split_scheduled(
         )
         guidance_scale = torch.tensor([args.guidance_scale])
     else:
-        scheduler = schedulers.SharkSchedulerWrapper(
+        scheduler = schedulers.AMDSharkSchedulerWrapper(
             args.device,
             args.scheduler_vmfb_path,
         )
