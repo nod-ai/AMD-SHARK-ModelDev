@@ -29,11 +29,11 @@ jobs:
         with:
           python-version: ${{matrix.version}}
 
-      - name: "Checkout AMDShark"
+      - name: "Checkout AMD-Shark"
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          repository: "nod-ai/AMDShark.git"
-          path: AMDShark
+          repository: "nod-ai/AMD-Shark.git"
+          path: AMD-Shark
           ref: "main"
 
       - name: "Checkout iree-turbine"

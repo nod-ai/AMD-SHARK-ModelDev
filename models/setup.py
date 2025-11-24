@@ -40,7 +40,7 @@ setup(
     description="AMDShark Turbine Machine Learning Model Zoo",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/nod-ai/AMDShark-Turbine",
+    url="https://github.com/nod-ai/AMD-SHARK-ModelDev",
     license="Apache-2.0",
     classifiers=[
         "Development Status :: 3 - Alpha",

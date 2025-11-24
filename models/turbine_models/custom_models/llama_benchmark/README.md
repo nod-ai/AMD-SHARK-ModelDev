@@ -2,8 +2,8 @@
 
 Clone and install AMDShark-Turbine
 ```
-git clone https://github.com/nod-ai/AMDShark-Turbine.git
-cd AMDShark-Turbine
+git clone https://github.com/nod-ai/AMD-SHARK-ModelDev.git
+cd AMD-SHARK-ModelDev
 python -m venv turbine_venv && source turbine_venv/bin/activate
 
 pip install --upgrade -r requirements.txt
