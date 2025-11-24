@@ -14,8 +14,8 @@ YOUR_HF_TOKEN="insert token for headless"
 
 # clone and install dependencies
 sudo apt install -y git
-git clone https://github.com/nod-ai/AMDShark-Turbine.git
-cd AMDShark-Turbine
+git clone https://github.com/nod-ai/AMD-Shark-ModelDev.git
+cd AMD-Shark-ModelDev
 pip install -r core/requirements.txt
 pip install -r models/requirements.txt
 
