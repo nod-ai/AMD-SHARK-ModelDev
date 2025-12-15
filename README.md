@@ -9,7 +9,7 @@ were developed, including:
 * [Torch-MLIR ONNX Importer](https://github.com/llvm/torch-mlir/blob/main/python/torch_mlir/extras/onnx_importer.py)
 * [Torch-MLIR's ONNX C Importer](https://github.com/llvm/torch-mlir/tree/main/projects/onnx_c_importer)
 * [IREE Turbine](https://github.com/iree-org/iree-turbine)
-* [AMDSharktank and Shortfin](https://github.com/nod-ai/Sharktank)
+* [AMDSharktank and Shortfin](https://github.com/nod-ai/amd-shark-ai)
 
 As these have all found upstream homes, this repo is a bit bare. We will
 continue to use it as a staging ground for things that don't have a
